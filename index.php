@@ -47,8 +47,8 @@ function school(){
 
 // Super Globals: Built-in variables available in all scopes without global keyword
 
-$_GET['name'];
-$_POST['submit'];
+// $_GET['name'];
+// $_POST['submit'];
 echo $name = $_POST['firstName'];
 echo $password = $_POST['password'];
 $_SESSION ['name'] = 'The name field must not be empty';
