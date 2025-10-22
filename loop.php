@@ -169,8 +169,6 @@ $students = [
     ["name" => "Charlie", "grade" => 78]
 ];
 echo "</br>";
-echo $students[2]['name']; // Outputs: Bob
-echo "</br>";
 foreach ($students as $student) {
     foreach ($student as $key => $value) {
         echo "$key: $value ";
@@ -179,11 +177,47 @@ foreach ($students as $student) {
 }
 
 echo "</br>";
-//Break and Continue Statements
-for ($i = 1; $i <= 10; $i++) {
-    if ($i == 5) {
-        break; // Exit the loop when i is 5
+
+// Complex Nested Arrays
+$inventory = [
+    "laptop" => ["price" => 999.99, "stock" => 15, "category" => "Electronics"],
+    "book" => ["price" => 29.99, "stock" => 100, "category" => "Education"],
+    "chair" => ["price" => 149.50, "stock" => 8, "category" => "Furniture"],
+    "phone" => ["price" => 699.99, "stock" => 25, "category" => "Electronics"],
+    "desk" => ["price" => 299.99, "stock" => 5, "category" => "Furniture"]
+];
+
+echo "<h3>Inventory Report:</h3>";
+$total_amount = 0;
+$low_stock_items = [];
+
+foreach ($inventory as $product => $details) {
+    $item_amount = $details["price"] * $details["stock"];
+    $total_amount += $item_amount;
+    
+    echo "<div style='border: 5px solid #ddd; margin: 10px; padding: 10px;'>";
+    echo "<h4>" . ucfirst($product) . "</h4>";
+    
+    foreach ($details as $attribute => $value) {
+        if ($attribute == "price") {
+            echo "Price: $" . number_format($value, 2) . "<br>";
+        } else {
+            echo ucfirst($attribute) . ": $value<br>";
+        }
     }
-    echo "Number: $i <br>";
-} echo "Hello World<br>";
+    
+    echo "Total Value: $" . number_format($item_amount, 2) . "<br>";
+    
+    // Check for low stock
+    if ($details["stock"] < 10) {
+        $low_stock_items[] = $product;
+        echo "<span style='color: red; font-weight: bold;'>⚠️ LOW STOCK!</span><br>";
+    }
+    
+    echo "</div>";
+}
+
+echo "<h3>Summary:</h3>";
+echo "Total Inventory Value: $" . number_format($total_amount, 2) . "<br>";
+echo "Low Stock Items: " . (count($low_stock_items) > 0 ? implode(", ", $low_stock_items) : "None") . "<br>";
 ?>
